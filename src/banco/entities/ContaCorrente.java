@@ -1,9 +1,7 @@
 package banco.entities;
 
-import banco.domainexception.NumeroNegativo;
-import banco.domainexception.NumeroNegativoException;
-import banco.domainexception.SaldoIndisponivelException;
-import banco.services.MetodosContas;
+import banco.domainexception.*;
+import banco.services.*;
 
 public class ContaCorrente extends Conta implements MetodosContas {
     private double limite = 500.0;
@@ -35,5 +33,23 @@ public class ContaCorrente extends Conta implements MetodosContas {
         if (saldo < 0) {
             limite += saldo;
         }
+    }
+
+    public void transferir(Conta destino, double valor)
+            throws SaldoIndisponivelException, NumeroNegativoException, ContaInexistenteException {
+        if (destino == null) {
+            throw new ContaInexistenteException();
+        }
+        if (valor < 0) {
+            throw new NumeroNegativoException();
+        }
+        if (valor > saldo + limite) {
+            throw new SaldoIndisponivelException();
+        }
+        saldo -= valor;
+        if (saldo < 0) {
+            limite += saldo;
+        }
+        destino.setSaldo(destino.getSaldo() + valor);
     }
 }
