@@ -40,16 +40,7 @@ public class ContaCorrente extends Conta implements MetodosContas {
         if (destino == null) {
             throw new ContaInexistenteException();
         }
-        if (valor < 0) {
-            throw new NumeroNegativoException();
-        }
-        if (valor > saldo + limite) {
-            throw new SaldoIndisponivelException();
-        }
-        saldo -= valor;
-        if (saldo < 0) {
-            limite += saldo;
-        }
-        destino.setSaldo(destino.getSaldo() + valor);
+        this.sacar(valor);
+        destino.saldo+=valor;
     }
 }

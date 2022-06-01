@@ -8,5 +8,5 @@ public interface MetodosContas {
 
     public void sacar(double valor) throws NumeroNegativoException, SaldoIndisponivelException;
 
-    public void transferir(Conta destino, double valor) throws NumeroNegativoException,SaldoIndisponivelException,
+    public void transferir(Conta destino, double valor) throws NumeroNegativoException,SaldoIndisponivelException,ContaInexistenteException;
 }
