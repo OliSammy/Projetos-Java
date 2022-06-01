@@ -11,6 +11,10 @@ public class ContaPoupanca extends Conta implements MetodosContas {
         rendimento = taxa;
     }
 
+    public void gerarRendimento(){
+        saldo += rendimento.rendimento(this);
+    }
+
     @Override
     public void depositar(double valor) throws NumeroNegativoException {
         if (valor < 0) {
